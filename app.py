@@ -1,6 +1,6 @@
 import argparse
 import requests
-from set_handler import set_handler
+from set_handler import set_handler, schedule_handler
 from datetime import datetime
 import os
 import dotenv
@@ -44,7 +44,7 @@ def main():
     subparsers = parser.add_subparsers(dest="command")
     set_parser = subparsers.add_parser('set', help="")
     show_parser = subparsers.add_parser('show')
-    schedule_parser = subparsers.add_parser('schedule')
+    noti_parser = subparsers.add_parser('noti')
     
     # setup "set" commands
     set_parser.add_argument('-ug', '--user-agent', dest='user_agent')
@@ -52,26 +52,28 @@ def main():
 
     # setup "get" commands
     show_parser.add_argument('-c', '--currency', dest="currency")
-    
-    # setup "schedule" (schedule notification) commands
-    schedule_parser.add_argument('-eve', '--every', dest="every")
-    schedule_parser.add_argument('-c', '--currency', dest="currency")
-    schedule_parser.add_argument('-rpm', '--rp-email', dest="recipient_email")
+
+    # setup "noti" (noti notification) commands
+    noti_parser.add_argument('-eve', '--every', dest="every")
+    noti_parser.add_argument('-c', '--currency', dest="currency")
+    noti_parser.add_argument('-to', '--to', dest="recipient")
     
 
     args: InputArgs = parser.parse_args()
         
     if args.command == "set": set_handler(args)    
     elif args.command == "show": print(get_gold_price(args.currency))
-    elif args.command == "schedule": print("schedule")
+    elif args.command == "noti":         
+        if args.every: schedule_handler(args)
+        else:
+            if args.recipient == None:
+                return
+            gold_price = get_gold_price(args.currency)
     
-    # gold_price = get_gold_price('THB')
+            # set up body
+            body = f'''{str(gold_price)}'''
+            sender.send_email_notification(body=body, subject='notification gold tracker', receiver_email=args.recipient)   
     
-    # parser.add_argument()
-    
-    # # set up body
-    # body = f'''{str(gold_price)}'''
-    # sender.send_email_notification(body=body, subject='notification gold tracker', receiver_email=args.recipient)   
 
 
 if __name__ == "__main__":
