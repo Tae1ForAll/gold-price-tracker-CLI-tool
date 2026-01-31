@@ -1,10 +1,7 @@
 import smtplib
-import dotenv
 import os
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
-
-dotenv.load_dotenv()
 
 smtp_server = os.getenv("SMTP_HOST") # Host for Outlook/Hotmail
 port = 587  # For STARTTLS
@@ -23,4 +20,4 @@ def send_email_notification(body: str, subject: str, receiver_email: str):
         server.starttls()
         server.login(sender_email, password)
         server.send_message(msg)
-        print("logging complete")
+        print("notification has been sent")

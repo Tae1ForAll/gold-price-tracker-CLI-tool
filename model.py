@@ -15,12 +15,8 @@ class InputArgs:
     config: str
     recipient: str
     currency: str
-    lower_bound: int
-    upper_bound: int
-    
-    def extract_every():
-        pass
-    
+    if_con: list[str]
+
 @dataclass
 class PriceInfo:
     price: float
