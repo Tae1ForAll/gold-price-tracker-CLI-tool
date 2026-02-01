@@ -2,6 +2,7 @@ import schedule
 import re
 import time
 
+# public function
 def run_schedule(every: str, job):
     try:        
         # extact mode and detail
@@ -47,7 +48,7 @@ def run_schedule(every: str, job):
     except Exception as e:
         raise(e)
 
-# private _functions
+# internal functions
 def _parse_every(eve: str):
     eve = eve.strip()
 

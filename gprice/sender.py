@@ -20,4 +20,4 @@ def send_email_notification(body: str, subject: str, receiver_email: str):
         server.starttls()
         server.login(sender_email, password)
         server.send_message(msg)
-        print("notification has been sent")
+        print(f"notification has been sent: {msg}")

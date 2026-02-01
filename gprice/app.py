@@ -1,18 +1,29 @@
+# extranal module
 import argparse
-from commands import set_handler, noti_handler
-from model import InputArgs
-from get_gold_price import get_gold_price
 
+# internal module
+from .commands import set_handler, noti_handler
+from .model import InputArgs
+from .get_gold_price import get_gold_price
+from gprice import __version__
 
 def main():
+    # TODO implement load data
+    
     # set up parsers
     parser = argparse.ArgumentParser(prog='Gold price tracker [CLI Tool]') 
     parser.add_argument('-c', '--currency', dest="currency")
+    parser.add_argument('-v', '--version', action="version", version=f"%(prog)s {__version__}")
+
 
     # setup subparsers
     subparsers = parser.add_subparsers(dest="command")
+    get_parser = subparsers.add_parser('get', help="")
     set_parser = subparsers.add_parser('set', help="")
-    noti_parser = subparsers.add_parser('noti')
+    noti_parser = subparsers.add_parser('noti', help="")
+        
+    # setup "get" commands
+    get_parser.add_argument('-c', '--currency')
     
     # setup "set" commands
     set_parser.add_argument('-ug', '--user-agent', dest='user_agent')
@@ -28,8 +39,8 @@ def main():
         
     if args.command == "set": set_handler(args)    
     elif args.command == "noti": noti_handler(args)
-    else: print(get_gold_price(args.currency))
-
-
-if __name__ == "__main__":
-    main()    
+    else:
+        if args.command == "version": 
+            print("version")
+        # handle main command argument   
+        print(get_gold_price(args.currency))

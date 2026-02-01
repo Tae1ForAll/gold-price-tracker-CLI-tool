@@ -3,9 +3,9 @@ import dotenv
 dotenv.load_dotenv()
 
 import requests
-import error
+from . import error
 from datetime import datetime
-from model import PriceInfo
+from .model import PriceInfo
 
 # load configs
 SOURCE_URL = os.getenv('SOURCE_URL')

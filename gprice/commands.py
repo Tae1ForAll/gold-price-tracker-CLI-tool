@@ -1,9 +1,12 @@
-from model import InputArgs, PriceInfo
-from get_gold_price import get_gold_price
-from condition_parser import Direction, Condition, parse_conditions
+from .model import InputArgs, PriceInfo, SenderEmailInfo
+from .get_gold_price import get_gold_price
+from .condition_parser import Direction, Condition, parse_conditions
+from . import sender
+from . import file_manager
+from . import scheduler
+
 from typing import Optional
-import scheduler
-import sender
+import getpass
 
 def set_handler(args: InputArgs):
     if args.sender_email == None and args.user_agent == None:
@@ -11,10 +14,19 @@ def set_handler(args: InputArgs):
         
     if args.sender_email:
         print("implement set sender-email")
+        
+        # ask for password then init dataclass with the variables 
+        app_password = getpass.getpass("Enter app password")
+        info = SenderEmailInfo(email=args.sender_email, password=app_password)
+        
+        # save config
+        info_dict = info.to_dict()
+        file_manager.save_credentials(info_dict)
     
     if args.user_agent:
-        print("implement setting user-agent")
+        file_manager.save_config({'user-agent': args.user_agent})
 
+#region "noti" command handler
 def noti_handler(args: InputArgs):
     prev_gold_price: Optional[PriceInfo] = None
     
@@ -64,3 +76,5 @@ def check_condition(diff: float, cons: list[Condition]) -> bool:
             return True
 
     return False
+
+# endregion
