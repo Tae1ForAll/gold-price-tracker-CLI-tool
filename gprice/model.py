@@ -1,20 +1,20 @@
-from dataclasses import dataclass, asdict
+from dataclasses import dataclass
 import datetime
 
 @dataclass
 class InputArgs:
     command: str
+    info: bool
     
-    # main parsers
-    
-    
-    # parsers for set commands
-    user_agent: str | None
+    # parsers for set-credential
     sender_email: str | None
+    
+    # parsers for set-config
+    header: str | None
+    smtp: str | None
     
     # parsers for noti commands
     every: str
-    config: str
     recipient: str
     currency: str
     if_con: list[str]
@@ -31,10 +31,29 @@ class PriceInfo:
             requested at  : {self.current_time}
         ''' 
 
+# credential ================================
 @dataclass
 class SenderEmailInfo:
     email: str
-    password: str        
+    password: str
     
-    def to_dict(self) -> dict:
-        return {"sender-email": asdict(self)}
+@dataclass
+class CredentialInfo:
+    sender_email: SenderEmailInfo
+# ===========================================
+
+# configs ===================================
+@dataclass
+class SMTPInfo:
+    server: str
+    port: int
+    
+@dataclass
+class HeaderInfo:
+    user_agent: str
+    
+@dataclass
+class ConfigInfo:
+    header: HeaderInfo
+    smtp: SMTPInfo
+# ===========================================

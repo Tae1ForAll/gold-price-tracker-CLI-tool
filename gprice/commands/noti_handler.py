@@ -1,34 +1,10 @@
-from .model import InputArgs, PriceInfo, SenderEmailInfo
-from .get_gold_price import get_gold_price
-from .condition_parser import Direction, Condition, parse_conditions
-from . import sender
-from . import file_manager
-from . import scheduler
-
+from .. import scheduler, sender, model 
+from ..gold_price import get_gold_price
+from ..condition_parser import Direction, Condition, parse_conditions
 from typing import Optional
-import getpass
 
-def set_handler(args: InputArgs):
-    if args.sender_email == None and args.user_agent == None:
-        print("input 'gprice set -h' to how to use")
-        
-    if args.sender_email:
-        print("implement set sender-email")
-        
-        # ask for password then init dataclass with the variables 
-        app_password = getpass.getpass("Enter app password")
-        info = SenderEmailInfo(email=args.sender_email, password=app_password)
-        
-        # save config
-        info_dict = info.to_dict()
-        file_manager.save_credentials(info_dict)
-    
-    if args.user_agent:
-        file_manager.save_config({'user-agent': args.user_agent})
-
-#region "noti" command handler
-def noti_handler(args: InputArgs):
-    prev_gold_price: Optional[PriceInfo] = None
+def handle_noti(args: model.InputArgs):
+    prev_gold_price: Optional[model.PriceInfo] = None
     
     # set up job
     def job():
@@ -36,7 +12,7 @@ def noti_handler(args: InputArgs):
         
         if args.recipient == None:
             return
-        gold_price: PriceInfo = get_gold_price(args.currency)
+        gold_price: model.PriceInfo = get_gold_price(args.currency)
         
         # check if the new price matches the conditions or not
         is_noti = True
@@ -76,5 +52,3 @@ def check_condition(diff: float, cons: list[Condition]) -> bool:
             return True
 
     return False
-
-# endregion
