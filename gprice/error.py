@@ -1,9 +1,6 @@
-# custom errors
 class APIRequestError(Exception): 
-    def __init__(self, message = "[ERR] "):
+    def __init__(self, message = ""):
         super().__init__(message)
-    pass
-
     
 class SchedulerError(Exception): 
     def __init__(self, message = "Schedule cannot start, Please enter (-eve -h) to learn how to use"):
@@ -12,4 +9,3 @@ class SchedulerError(Exception):
 class CredentialInvalid(Exception):
     def __init__(self, message):
         super().__init__(message)
-# =======================================

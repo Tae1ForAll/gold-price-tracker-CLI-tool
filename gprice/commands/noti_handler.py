@@ -3,7 +3,7 @@ from ..condition_parser import Direction, Condition, parse_conditions
 import gprice.gold_price as gold_price
 import gprice.data_manager as data_manager
 
-def handle_noti(args: model.InputArgs):   
+def handle(args: model.InputArgs):   
     # set up job
     def job():
         if args.recipient == None:
