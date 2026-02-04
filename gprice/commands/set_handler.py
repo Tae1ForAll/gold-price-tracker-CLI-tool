@@ -1,12 +1,12 @@
 import gprice.model as model
 import gprice.data_manager as data_manager
 import gprice.sender as sender
-import gprice.custom_printer as cprinter
+import gprice.utils as utils
 import getpass
 
 def handle_set_credential(args: model.InputArgs):
     if args.sender_email is None:
-        cprinter.print_error("Please enter arguments")
+        utils.print_error("Please enter arguments")
         return
         
     app_password = getpass.getpass("Enter app password: ")

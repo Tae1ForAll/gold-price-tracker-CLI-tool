@@ -1,7 +1,6 @@
 import gprice.gold_price as gold_price
 import gprice.data_manager as data_manager
 import gprice.model as model
-import gprice.custom_printer as cprinter
 import gprice.utils as utils
 
 def handle(args: model.InputArgs):
@@ -9,5 +8,5 @@ def handle(args: model.InputArgs):
     
     data = gold_price.get_gold_price(args.unit_type, args.currency, purity)
     data_manager.save_price(data)
-    cprinter.print_auto(str(data))
+    utils.print_auto(str(data))
 

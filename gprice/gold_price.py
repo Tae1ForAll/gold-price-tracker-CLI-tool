@@ -4,7 +4,7 @@ from datetime import datetime
 import gprice.error as error 
 import gprice.data_manager as data_manager
 import gprice.model as model
-import gprice.custom_printer as cprinter
+import gprice.utils as utils
 
 # mulipliers used to convert from oz to a specific unit of measurement
 UNIT_MULTIPLIER = {
@@ -14,7 +14,7 @@ UNIT_MULTIPLIER = {
     "hk_tael": 0.8307,
     "taiwan_tael": 0.8294,
     "tola": 2.6667
-}        
+}
 
 def get_gold_price(
     unit_type: str='oz', 
@@ -26,7 +26,7 @@ def get_gold_price(
         # validate multiplier key
         if unit_type not in UNIT_MULTIPLIER:
             unit_type = 'oz'
-            cprinter.print_warning("Invalid gold unit type, it's automatically set to troy ounce (oz)")    
+            utils.print_warning("Invalid gold unit type, it's automatically set to troy ounce (oz)")    
 
         if not currency:
             currency = 'USD'
@@ -63,6 +63,6 @@ def get_gold_price(
         return gold_price
     
     except error.APIRequestError as e:
-        cprinter.print_auto(str(e))
+        utils.print_auto(str(e))
     except Exception as e:
-        cprinter.print_auto(str(e))
+        utils.print_auto(str(e))

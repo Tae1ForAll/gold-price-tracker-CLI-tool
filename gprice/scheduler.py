@@ -1,7 +1,7 @@
 import schedule
 import re
 import time
-import gprice.custom_printer as printer
+import gprice.utils as utils
 import gprice.error as error
 
 # scheduler message
@@ -27,16 +27,16 @@ def run_schedule(every: str, job):
         # time mode
         if mode == "t": 
             schedule.every(total).seconds.do(job)
-            printer.print_auto(f"Job execute every {detail}")
+            utils.print_auto(f"Job execute every {detail}")
             
         # number of day mode        
         elif mode.endswith("d"): 
             days = _parse_days(mode)
             schedule.every(days).days.at(detail)
             if days == 1:
-                printer.print_auto(f"Job execute everyday at {detail}")
+                utils.print_auto(f"Job execute everyday at {detail}")
             else:
-                printer.print_auto(f"Job execute every {days} days at {detail}")
+                utils.print_auto(f"Job execute every {days} days at {detail}")
 
         # days mode (mon-sun)
         else:
@@ -50,7 +50,7 @@ def run_schedule(every: str, job):
                 case "sun": schedule.every().sunday.at(detail).do(job)
                 case __:
                     raise ValueError(SCHD_DEFAULT_ERROR_MESSAGE)            
-            printer.print_auto(f"Job execute every {mode.upper()} at {detail}")
+            utils.print_auto(f"Job execute every {mode.upper()} at {detail}")
         
 
         while True:
@@ -58,9 +58,9 @@ def run_schedule(every: str, job):
             time.sleep(1) 
             
     except error.SchedulerError as e:
-        printer.print_error(str(e))
+        utils.print_error(str(e))
     except Exception as e:
-        printer.print_error(str(e))
+        utils.print_error(str(e))
  
 # internal functions
 def _parse_every(eve: str):
