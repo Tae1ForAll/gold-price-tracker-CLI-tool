@@ -32,7 +32,7 @@ PREV_PRICE_PATH = BASE_DIR / "price_cache.toml"
 # save data section *************************************************************************************
 def save_credential(new_credential: model.CredentialInfo): _save(CREDS_PATH, asdict(new_credential))
 def save_config(new_config: model.ConfigInfo): _save(CONFIG_PATH, asdict(new_config))
-def save_prev_price(price: model.PriceInfo): _save(PREV_PRICE_PATH, asdict(price))
+def save_price(price: model.PriceInfo): _save(PREV_PRICE_PATH, asdict(price))
 # *******************************************************************************************************
 
 # load data section *************************************************************************************
