@@ -22,23 +22,28 @@ def main():
     get_parser.add_argument('-c', '--currency', 
                             metavar="",
                             help="determines gold price currency default, USD")
+    
     get_parser.add_argument('-p', '--purity', 
                             metavar="",
                             help="determines purity of gold default 100")
+    
     get_parser.add_argument('-u', '--unit_type', 
                             metavar="",
                             help="determines a specific weight unit such as taiwan_tael, thai_baht")
     
     # setup "set" commands *********************************************************************    
-    set_cred_parser.add_argument('-sm', '--sender_email')
+    set_cred_parser.add_argument('-sm', '--sender_email', metavar="")
     set_config_parser.add_argument('--header', 
-                                   metavar="key=value", 
-                                   help="Set header config (eg. user_agent=value)")
+                                   metavar="", 
+                                   help="Set header config > keys: user_agent (eg. user_agent=value) \n ")
+    set_config_parser.add_argument('-smtp', 
+                                   metavar="",
+                                   help="Set SMTP values > key: server (eg. server=smtp.gmail.com)")
     # ******************************************************************************************
 
     # setup "noti" (noti notification) commands ************************************************
-    noti_parser.add_argument('-eve', '--every', dest="every") # schedule checking gold price
-    noti_parser.add_argument('-c', '--currency', dest="currency") # target currency
+    noti_parser.add_argument('-eve', '--every') # schedule checking gold price
+    noti_parser.add_argument('-c', '--currency') # target currency
     noti_parser.add_argument('-to', '--to', dest="recipient") # recipient
     noti_parser.add_argument('-if', '--if_con', nargs="+", default=[])
     #*******************************************************************************************

@@ -34,7 +34,7 @@ def handle_set_config(args: model.InputArgs):
             case "user-agent": config_info.header.user_agent = value
             case __: raise ValueError("no keys matched (Please read the document)")
             
-    if args.smtp:
+    if args.smtp or None:
         key, value = parse_kv(args.smtp)
         match key:
             case "server":
