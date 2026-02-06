@@ -8,7 +8,7 @@ import gprice.data_manager as data_manager
 import gprice.model as model
 import gprice.utils as utils
 
-def send_email_notification(body: str, subject: str, receiver_email: str):
+def send_email_notification(body: str, subject: str, receiver_email: str, show_log=True):
     credentials = data_manager.load_credential()
     config = data_manager.load_config()
     sender = credentials.sender_email
@@ -24,7 +24,9 @@ def send_email_notification(body: str, subject: str, receiver_email: str):
         server.starttls()
         server.login(sender.email, sender.password)
         server.send_message(msg)
-        print(f"notification has been sent: {msg}")
+        
+        if show_log:
+            utils.print_auto(f"notification has been sent: {msg}")
         
         
 def check_email_credential(credential: model.CredentialInfo):
