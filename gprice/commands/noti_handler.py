@@ -1,5 +1,5 @@
 from .. import scheduler, sender, model 
-from ..condition_parser import Direction, Condition, parse_conditions
+from gprice.condition_parser import Direction, Condition, parse_conditions
 import gprice.gold_price as gold_price
 import gprice.data_manager as data_manager
 

@@ -6,6 +6,7 @@ from email.mime.multipart import MIMEMultipart
 # internal modules
 import gprice.data_manager as data_manager
 import gprice.model as model
+import gprice.utils as utils
 
 def send_email_notification(body: str, subject: str, receiver_email: str):
     credentials = data_manager.load_credential()
@@ -42,10 +43,13 @@ def check_email_credential(credential: model.CredentialInfo):
         return True  # success
     
     except smtplib.SMTPAuthenticationError:
+        utils.print_error("Authentication failed, Please re-check your email and app password")
         return False
 
     except smtplib.SMTPConnectError:
-        raise RuntimeError("Failed to connect to SMTP server")
-
-    except smtplib.SMTPException as e:
-        raise RuntimeError(f"SMTP error: {e}")
+        utils.print_error("Failed to connect to SMTP server")
+        return False
+    
+    except Exception:
+        utils.print_error("Unexpected Error, Please check your internet connection")
+        return False

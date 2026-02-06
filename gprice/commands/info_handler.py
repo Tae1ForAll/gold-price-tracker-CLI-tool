@@ -13,10 +13,11 @@ def _display_configures():
     
     # Header
     print("Config:")
-    print(f"  User-Agent  : {cfg.header.user_agent}\n")
+    print("  Header")
+    print(f"    User-Agent:     {cfg.header.user_agent}")
 
     # smtp
-    print("  SMTP Infomation:")
+    print("  SMTP Infomation")
     print(f"    SMTP server:    {cfg.smtp.server}")
     print(f"    SMTP port:      {cfg.smtp.port}")
 
@@ -29,12 +30,14 @@ def _display_credentials():
         print("Credentials not yet initialized.")
         return
     
-    print(f"Credentials\n")
+    print(f"Credentials")
     creds = data_manager.load_credential()
     
-    # sender email
-    print("  Sender Email:")
-    print(f"    Email:          {creds.sender_email.email}")
-    print(f"    App password:   {"*********" if creds.sender_email.password else "(not set)"}\n")
-    
+    # display sender email
+    if creds.sender_email:
+        print("  Sender Email")
+        print(f"    Email:          {creds.sender_email.email}")
+        print(f"    App password:   {"*********" if creds.sender_email.password else "(not set)"}\n")
+    else:
+        print("  Sender Email: (not yet initialized)")    
     

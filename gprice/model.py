@@ -47,7 +47,7 @@ class PriceInfo:
 class SenderEmailInfo:
     email: str
     password: str
-    
+        
 @dataclass
 class CredentialInfo:
     sender_email: SenderEmailInfo

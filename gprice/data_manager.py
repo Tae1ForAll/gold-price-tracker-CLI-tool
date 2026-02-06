@@ -27,7 +27,7 @@ SOURCE_URL = "https://data-asg.goldprice.org/dbXRates/"
 BASE_DIR = Path.home() / ".gprice"
 CONFIG_PATH = BASE_DIR / "config.toml" # custom config
 CREDS_PATH = BASE_DIR / "credentials.toml"
-PREV_PRICE_PATH = BASE_DIR / "price_cache.toml"
+PREV_PRICE_PATH = BASE_DIR / "price_cache.toml"        
 
 # save data section *************************************************************************************
 def save_credential(new_credential: model.CredentialInfo): _save(CREDS_PATH, asdict(new_credential))
@@ -38,9 +38,13 @@ def save_price(price: model.PriceInfo): _save(PREV_PRICE_PATH, asdict(price))
 # load data section *************************************************************************************
 def load_credential():
     data = _load(CREDS_PATH) or {}
+        
     sender_email_data = data.get("sender_email", {})  # dict
-    sender_email = model.SenderEmailInfo(**sender_email_data)
-    return model.CredentialInfo(sender_email=sender_email)
+    sender_email = model.SenderEmailInfo(**sender_email_data)    
+    
+    return model.CredentialInfo(
+        sender_email=sender_email
+    )
     
 def load_config() -> model.ConfigInfo:
     data = _load(CONFIG_PATH) or {}
