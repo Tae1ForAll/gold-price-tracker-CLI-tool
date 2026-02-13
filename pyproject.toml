@@ -1,0 +1,22 @@
+[build-system]
+requires = ["setuptools >= 80.10.2", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "gprice"
+version = "0.1.1"
+description = "Gold price tracker CLI tool"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+  "requests",
+  "tomli_w",
+  "schedule"
+]
+
+[project.scripts]
+gprice = "gprice.app:main"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["gprice*"]
