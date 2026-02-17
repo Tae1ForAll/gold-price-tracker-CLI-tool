@@ -1,7 +1,9 @@
 # What is GPrice 
-GPrice is a CLI-tool for tracking gold price, allowing you to easily and simply setting up notifications for Email using simple commands<br> 
-[Get started](#get-started)<br>
-[Commands](#commands)
+GPrice is a CLI-tool for tracking gold price, allowing you to easily and simply setting up notifications for Email using simple commands<br>
+### Table Of Contents
+- [Get started](#get-started)<br>
+- [Commands](#commands)<br>
+  - [Build-in Sceduler](#buildin-scheduler)
 
 # Get Started
 ### Step 1: Install gprice with pip
