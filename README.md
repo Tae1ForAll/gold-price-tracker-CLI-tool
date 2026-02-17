@@ -3,8 +3,8 @@ GPrice is a CLI-tool for tracking gold price, allowing you to easily and simply 
 ### Table Of Contents
 - [Get started](#get-started)
 - [Commands](#commands)
-  - [Build-in Scheduler](#buildin-scheduler-(-eve))
-  - [Set condition](#set-condition-with-(-if))
+  - [Build-in Scheduler](#buildin-scheduler-eve)
+  - [Set condition](#set-condition-with-if)
 
 # Get Started
 ### Step 1: Install gprice with pip
