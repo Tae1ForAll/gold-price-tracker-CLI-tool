@@ -5,6 +5,7 @@ GPrice is a CLI-tool for tracking gold price, allowing you to easily and simply 
 - [Commands](#commands)
   - [Build-in Scheduler](#built-in-scheduler--eve)
   - [Set condition](#set-condition-with--if)
+- [Available Weight Units](#available-weight-units)
 
 # Get Started
 ### Step 1: Install gprice with pip
@@ -79,12 +80,12 @@ gprice set-credential -sm "your_email@gmail.com"
 ````
 ***
 
-__gprice get [options]__
+__gprice get [options] [option Parameters]__
 | option | application | parameters
 |:---|:---|:---|
-| -c or --currency | to set currency for gold price | - |
-| -p or --purity | to set purity of gold (Default is 100) | - |
-| -u or --unit_type | to set gold weight unit (Default is oz) see available gold weight units | - |
+| -c or --currency | to set currency for gold price | currency code (eg. USD, THB) |
+| -p or --purity | to set purity of gold (Default is 100%) | percentage (e.g., 95%) |
+| -u or --unit_type | to set gold weight unit (Default is oz) see available gold weight units | [available weight units](#available-weight-units) (eg. oz) |
 
 example usage:
 ```
@@ -94,9 +95,9 @@ gprice get -c USD -p 95% -u oz
 __gprice noti [options]__
 | option | application | parameters
 |:---|:---|:---|
-| -c or --currency | to set currency for gold price | - |
-| -p or --purity | to set purity of gold (Default is 100) | - |
-| -u or --unit_type | to set gold weight unit (Default is oz) see available gold weight units | - |
+| -c or --currency | to set currency for gold price | currency code (eg. USD, THB) |
+| -p or --purity | to set purity of gold (Default is 100) | percentage (e.g., 95%) |
+| -u or --unit_type | to set gold weight unit (Default is oz) see available gold weight units | [available weight units](#available-weight-units) (eg. oz) |
 | -eve or --every | run-time scheduler for running a command (not recommend) | - |
 | -to or --to | to set receiver email | - |
 | -if or --if | to set condition to trigger notification<br>eg. send notification when price goes down by 500usd | - |
@@ -128,3 +129,11 @@ the above command can be translated to this
 > the gold price (USD) is checked every 5 mins and 
 > if the price goes up or goes down by 500USD,
 > the notification is sent to the receiver mail.
+
+## Available Weight Units
+* oz
+* thai_baht
+* china_tael
+* hk_tael
+* taiwan_tael
+* tola
