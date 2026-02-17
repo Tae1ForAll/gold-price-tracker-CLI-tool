@@ -36,6 +36,7 @@ gprice set-config --header user-agent="your prefer user-agent"
 ### Step 4: Get app password<br>
 First, you need to get app password for gmail or alternatives like outlook<br>
 * [Learn how to get app password for gmail](https://support.google.com/accounts/answer/185833?hl=en)
+* [Learn how to get app password for outlook](https://support.microsoft.com/en-us/account-billing/how-to-get-and-use-app-passwords-5896ed9b-4263-e681-128a-a6f2979a7944)
 ***
 
 ### Step 5: **Set sender's email**
