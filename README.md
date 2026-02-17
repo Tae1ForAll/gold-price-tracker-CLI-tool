@@ -1,61 +1,109 @@
-# What is GPrice
-GPrice is a CLI-tool for tracking gold price, allowing you to easily and simply setting up notifications for Email using simple commands 
+# What is GPrice 
+GPrice is a CLI-tool for tracking gold price, allowing you to easily and simply setting up notifications for Email using simple commands<br> 
+[Get started](#get-started)<br>
+[Commands](#commands)
 
-# Setup for email notificaton
-GPrice Installation
+# Get Started
+### Step 1: Install gprice with pip
 ````
 pip install gprice
-
 ````
-> note: you may need to install pip before if don't have
+> [!Warning]
+> Recommend to create virtual environment before installation<br>
+> Alternatively, if you do not want to, you may need to add python to PATH ENVIRONMENT VARIABLE (work only in window)
+***
 
-check gprice avalability
+### Step 2: Check gprice availability
 ````
 gprice --version
 ````
-It should show somthing like this
+> expected output
+>    ```
+>    Gold price tracker [CLI Tool] x.x.x
+>    ```
+***
+
+### Step 3: Set user agent
+````
+gprice set-config --header user-agent="your prefer user-agent"
+````
+***
+
+### Step 4: Get app password<br>
+First, you need to get app password for gmail or alternatives like outlook<br>
+* [Learn how to get app password for gmail](https://support.google.com/accounts/answer/185833?hl=en)
+***
+
+### Step 5: **Set sender's email**
+````
+gprice set-credential -sm "your_sender@gmail.com" 
+````
+> The program will ask you to input "app password" 
+> ````
+> Enter app password: *****************
+> ````
+***
+
+### Step 6: Check configuration correctness<br>
+After having all previos steps completed, you may want to check all configuration and credentials
+````
+gprice -i
 ````
 
-````
 
-Set up sender email
-````
-gprice set -se "your_sender@gmail.com" 
-````
-
-The program will prompt you to input "app password" 
-````
-Enter password for your_sender@gmail.com: *****************
-````
-
+### 
 # Commands
-__gprice set [Option]__
-| option | full-text option | application |
-|:---:|:---:|:---:|
-| -se | --sender-email | to determine sender email |
-| -smtph | --smtp-host | to determine host server for sending email |
-| -ug | --user-agent | to determine user agent |
+**gprice set-config [option] [option Parameters]**
+| option | application | parameters |
+|:---|:---|:---|
+| --header or --header | to config header properties | server="your prefer smtp server" |
+| -smtp or --smtp | to config SMTP properties for sending email | user-agent="your user-agent" |
 
-__gprice show [options]__
-| option | full-text option | application |
-|:---:|:---:|:---:|
-| -c | --currency | show gold price in the specified currency | 
-| -i | --info | show infomation about the configuration<br>such as sender email, host server, and so on |
+example usage:
+````
+gprice set-config -smtp server="smtp.gmail.com" -header user-agent="<your user-agent>"
+````
+***
 
+__gprice set-credential [option]__
+| option | application | parameters
+|:---|:---|:---|
+| -sm or --sender_email | to set up sender email for notification | -
+
+example usage:
+````
+gprice set-credential -sm "your_email@gmail.com"
+````
+***
+
+__gprice get [options]__
+| option | application | parameters
+|:---|:---|:---|
+| -c or --currency | to set currency for gold price | - |
+| -p or --purity | to set purity of gold (Default is 100) | - |
+| -u or --unit_type | to set gold weight unit (Default is oz) see available gold weight units | - |
+
+example usage:
+```
+gprice get -c USD -p 95% -u oz
+```
+***
 __gprice noti [options]__
-| option | full-text option | application |
-|:---:|:---:|:---:|
-| -c | --currency | get gold price in the specified currency |
-| -eve | --every | run-time scheduler for running a command (not recommend) | 
-| -to | --to | set receiver email |
-| -if | --if | set condition to trigger notification<br>eg. send notification when price goes down by 500usd
+| option | application | parameters
+|:---|:---|:---|
+| -c or --currency | to set currency for gold price | - |
+| -p or --purity | to set purity of gold (Default is 100) | - |
+| -u or --unit_type | to set gold weight unit (Default is oz) see available gold weight units | - |
+| -eve or --every | run-time scheduler for running a command (not recommend) | - |
+| -to or --to | to set receiver email | - |
+| -if or --if | to set condition to trigger notification<br>eg. send notification when price goes down by 500usd | - |
 
-# Built-in scheduler (-eve)
+### Built-in scheduler (-eve)
 ````
 -eve (prefix)[hh:mm:ss]
 ````
 | prefix | example | translation |
-|:---:|:---:|:---:|
+|:---|:---|:---|
 | t | t[02:00:00] | every 2 hours
 | d, 2d, .. nd | d[02:00:00] | everyday at 2:00 AM. 
 | mon-sun | mon[02:00:00] | every monday at 2:00 AM.
@@ -65,7 +113,7 @@ gprice noti -c USD -to "receiver@hotmail.com" -eve 2d[02:00:00]
 the above command can be translated to this
 > report the current gold price to "receiver@hotmail.com" every 2 day at 2:00 AM.
 
-# Make condition with (-if)
+### Set condition with (-if)
 up[x] = when price goes up to x \
 down[x] = when price goes down to x
 
