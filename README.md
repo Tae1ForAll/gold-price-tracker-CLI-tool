@@ -1,4 +1,7 @@
-# What is GPrice 
+# What is GPrice <br>
+[![Static Badge](https://img.shields.io/badge/github-repo-purple?logo=github)](https://github.com/Tae1ForAll/gold-price-tracker-CLI-tool)
+![PyPI - Version](https://img.shields.io/pypi/v/gprice?color=blue)
+<br>
 GPrice is a CLI-tool for tracking gold price, allowing you to easily and simply setting up notifications for Email using simple commands<br>
 ### Table Of Contents
 - [Get started](#get-started)
