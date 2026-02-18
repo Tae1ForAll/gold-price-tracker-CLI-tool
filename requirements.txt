@@ -4,8 +4,6 @@ cffi==2.0.0
 charset-normalizer==3.4.4
 cryptography==46.0.5
 docutils==0.22.4
--e git+https://github.com/Tae1ForAll/gold-price-tracker-CLI-tool.git@a717dac3474510dc3a18b2aae8344bb6852ea0e3#egg=gold_price_tracker_CLI
-gprice @ file:///home/taeofkitava/Documents/Projects/gold-price-tracker-CLI-tool/dist/gprice-0.1.1-py3-none-any.whl#sha256=275f9ddf489f9760d5c28d6a62742f8787f605a24483c499a212efbd9e357dc3
 id==1.6.1
 idna==3.11
 jaraco.classes==3.4.0

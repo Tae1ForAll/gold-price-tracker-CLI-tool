@@ -4,9 +4,12 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "gprice"
-version = "0.1.1"
+version = "0.2.1"
 description = "Gold price tracker CLI tool"
 readme = "README.md"
+authors = [
+  {name = "Worrapon Jeennahoo"}
+]
 requires-python = ">=3.12"
 dependencies = [
   "requests",
