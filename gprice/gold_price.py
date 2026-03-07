@@ -38,7 +38,12 @@ def get_gold_price(
         CONFIG = data_manager.load_config()
         
         target_url = f'{SOURCE_URL}{currency}'
-        headers = {'User-Agent': CONFIG.header.user_agent}
+        headers = {
+            'User-Agent': CONFIG.header.user_agent,
+            "Referer": "https://goldprice.org/",
+            "Origin": "https://goldprice.org",
+            "Accept": "*/*"
+        }
         response = requests.get(target_url, headers=headers)
         
         if response.status_code != 200:
